@@ -7,11 +7,14 @@ const userSchema = new mongoose.Schema(
     email: {
       type: String,
       required: true,
-      index: true,
+      //index: true,
     },
     role: {
       type: String,
       default: "subscriber",
+    },
+    shows: {
+      type: Array
     }
   },
   { timestamps: true }

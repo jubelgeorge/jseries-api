@@ -3,18 +3,30 @@ const { ObjectId } = mongoose.Schema;
 
 const showSchema = new mongoose.Schema(
   {
-    title: {
-      type: String,
-      trim: true,
-      required: true,
-      maxlength: 32,
-      text: true,
+    name: {
+      type: String
     },
-    slug: {
+    premiered: {
+      type: String
+    },
+    imdb: {
+      type: String
+    },
+    image: {
+      type: String
+    },
+    watchStatus: {
       type: String,
-      unique: true,
-      lowercase: true,
-      index: true,
+      default: "Already Watched",
+      enum: [
+        "Already Watched",
+        "Currently Watching",
+        "Not Yet Watched"
+      ]
+    },
+    addedBy: { 
+      type: ObjectId, 
+      ref: "User" 
     }
   },
   { timestamps: true }

@@ -10,7 +10,7 @@ const {
 } = require("../controllers/show");
 
 // routes
-router.post("/search/shows", searchShows);
+router.post("/search-shows", searchShows);
 
 
 

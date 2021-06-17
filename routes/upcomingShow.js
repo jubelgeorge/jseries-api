@@ -33,7 +33,7 @@ let upload = multer({ storage, fileFilter });
 
 
 // routes
-router.get("/admin/upcoming-shows", list);
+router.get("/upcoming-shows", list);
 router.delete("/admin/upcoming-show/:upcomingShowId", authCheck, adminCheck, remove);
 
 router.post('/admin/upcoming-show', authCheck, adminCheck, upload.single('image'), async (req, res) => {

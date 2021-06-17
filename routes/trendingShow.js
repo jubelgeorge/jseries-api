@@ -33,7 +33,7 @@ let upload = multer({ storage, fileFilter });
 
 
 // routes
-router.get("/admin/trending-shows", list);
+router.get("/trending-shows", list);
 router.delete("/admin/trending-show/:trendingShowId", authCheck, adminCheck, remove);
 
 router.post('/admin/trending-show', authCheck, adminCheck, upload.single('image'), async (req, res) => {
@@ -50,7 +50,8 @@ router.post('/admin/trending-show', authCheck, adminCheck, upload.single('image'
     res.json(trendingShow);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server error');  }        
+    res.status(500).send('Server error'); 
+  }        
 });
 
 
