@@ -4,7 +4,8 @@ const { ObjectId } = mongoose.Schema;
 const showSchema = new mongoose.Schema(
   {
     name: {
-      type: String
+      type: String,
+      text: true
     },
     premiered: {
       type: String

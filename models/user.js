@@ -12,9 +12,6 @@ const userSchema = new mongoose.Schema(
     role: {
       type: String,
       default: "subscriber",
-    },
-    shows: {
-      type: Array
     }
   },
   { timestamps: true }

@@ -74,3 +74,30 @@ exports.updateShow = async (req, res) => {
         return res.status(400).send("Show delete failed");
     }
 };
+
+exports.updateShowByIMDB = async (req, res) => {
+    try {
+        //console.log(req.body);
+        const showWatchStatus = req.body.showWatchStatus;
+        const user = await User.findOne({ email: req.user.email }).exec();
+        const updated = await Show.findOneAndUpdate(
+            {$and: [{ imdb: req.params.imdb }, { addedBy: user._id }]},
+            { watchStatus: showWatchStatus },
+            { new: true }
+        ).exec();
+        //console.log(updated);
+        res.json({ ok: true });
+    } catch (err) {
+        console.log(err);
+        return res.status(400).send("Show delete failed");
+    }
+};
+
+exports.getShowsByText = async (req, res) => {
+    //console.log(req);
+    const query = req.body.text;
+    const user = await User.findOne({ email: req.user.email }).exec();
+    const shows = await Show.find({$and: [{ "name" : new RegExp(query, 'i')  }, { addedBy: user._id }]})
+    //console.log(shows);    
+    res.json(shows);
+};

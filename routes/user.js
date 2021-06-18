@@ -10,7 +10,9 @@ const {
   getShows,
   removeShow,
   getShow,
-  updateShow
+  updateShow,
+  updateShowByIMDB,
+  getShowsByText
 } = require("../controllers/user");
 
 
@@ -20,5 +22,7 @@ router.get("/user/shows", authCheck, getShows);
 router.delete("/user/show/:imdb", authCheck, removeShow);
 router.get("/user/show/:id", authCheck, getShow);
 router.put("/user/show/:id", authCheck, updateShow);
+router.put("/user/show-byimdb/:imdb", authCheck, updateShowByIMDB);
+router.post("/user/search-shows", authCheck, getShowsByText);
 
 module.exports = router;
