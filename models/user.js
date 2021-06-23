@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { ObjectId } = mongoose.Schema;
+
 
 const userSchema = new mongoose.Schema(
   {
@@ -7,11 +7,14 @@ const userSchema = new mongoose.Schema(
     email: {
       type: String,
       required: true,
-      //index: true,
     },
     role: {
       type: String,
       default: "subscriber",
+    },
+    profileStatus: {
+      type: String,
+      default: "public",
     }
   },
   { timestamps: true }

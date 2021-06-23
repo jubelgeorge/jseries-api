@@ -33,14 +33,22 @@ let upload = multer({ storage, fileFilter });
 
 
 // routes
+
+// @route    GET api/upcoming-shows
+// @desc     Get upcoming shows
+// @access   Public
 router.get("/upcoming-shows", list);
+
+// @route    DELETE api/admin/upcoming-show/:upcomingShowId
+// @desc     Delete a upcoming show by upcomingShowId
+// @access   Private
 router.delete("/admin/upcoming-show/:upcomingShowId", authCheck, adminCheck, remove);
 
+// @route    POST api/admin/upcoming-show
+// @desc     Create a upcomingShow
+// @access   Private
 router.post('/admin/upcoming-show', authCheck, adminCheck, upload.single('image'), async (req, res) => {
-
   try {
-    // console.log(req); 
-    
     const newUpcomingShow = new UpcomingShow({
       name: req.body.name,
       image: req.file.originalname

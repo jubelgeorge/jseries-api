@@ -1,13 +1,10 @@
-const {validationResult} = require('express-validator');
-
 const User = require("../models/user");
 
-exports.createOrUpdateUser = async (req, res) => {
-  const errors = validationResult(req);
-  if(!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
 
+// @route    POST api/create-or-update-user
+// @desc     Create or update a user
+// @access   Private
+exports.createOrUpdateUser = async (req, res) => { 
   try {
     const { email } = req.user;  
     const user = await User.findOneAndUpdate(
@@ -32,9 +29,17 @@ exports.createOrUpdateUser = async (req, res) => {
     }
 };
 
+// @route    POST api/current-(user/admin)
+// @desc     Current (User/Admin)
+// @access   Private
 exports.currentUser = async (req, res) => {
-  User.findOne({ email: req.user.email }).exec((err, user) => {
-    if (err) throw new Error(err);
-    res.json(user);
-  });
+  try {
+    User.findOne({ email: req.user.email }).exec((err, user) => {
+      if (err) throw new Error(err);
+      res.json(user);
+    });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }  
 };

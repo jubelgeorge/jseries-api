@@ -33,14 +33,22 @@ let upload = multer({ storage, fileFilter });
 
 
 // routes
+
+// @route    GET api/trending-shows
+// @desc     Get trending shows
+// @access   Public
 router.get("/trending-shows", list);
+
+// @route    DELETE api/admin/trending-show/:trendingShowId
+// @desc     Delete a trending show by trendingShowId
+// @access   Private
 router.delete("/admin/trending-show/:trendingShowId", authCheck, adminCheck, remove);
 
+// @route    POST api/admin/trending-show
+// @desc     Create a trendingShow
+// @access   Private
 router.post('/admin/trending-show', authCheck, adminCheck, upload.single('image'), async (req, res) => {
-
-  try {
-    // console.log(req); 
-    
+  try {    
     const newTrendingShow = new TrendingShow({
       name: req.body.name,
       image: req.file.originalname
